@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import Script from 'next/script'
 import './globals.css'
 import Navigation from '@/components/Navigation'
 import CosmicBadge from '@/components/CosmicBadge'
@@ -22,7 +23,10 @@ export default function RootLayout({
     <html lang="en">
       <head>
         {/* Console capture script for dashboard debugging */}
-        <script src="/dashboard-console-capture.js" />
+        <Script 
+          src="/dashboard-console-capture.js" 
+          strategy="beforeInteractive"
+        />
       </head>
       <body className={inter.className}>
         <Navigation />
