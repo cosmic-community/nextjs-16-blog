@@ -26,6 +26,11 @@ export default async function PostPage({ params }: PageProps) {
     notFound()
   }
 
+  // Process markdown content to handle any formatting issues
+  const processedContent = post.metadata?.content
+    ? post.metadata.content.replace(/\\n/g, '\n')
+    : ''
+
   return (
     <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       {/* Header */}
@@ -94,9 +99,9 @@ export default async function PostPage({ params }: PageProps) {
       )}
 
       {/* Content */}
-      <div className="prose prose-lg max-w-none">
-        {post.metadata?.content && (
-          <ReactMarkdown>{post.metadata.content}</ReactMarkdown>
+      <div className="prose prose-lg prose-headings:font-bold prose-h1:text-4xl prose-h2:text-3xl prose-h2:mt-8 prose-h2:mb-4 prose-p:text-gray-700 prose-p:leading-relaxed prose-strong:text-gray-900 prose-strong:font-semibold prose-ul:list-disc prose-ul:pl-6 prose-li:text-gray-700 max-w-none">
+        {processedContent && (
+          <ReactMarkdown>{processedContent}</ReactMarkdown>
         )}
       </div>
 
